@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: vut-clinic-system
+    env: docker
+    repo: https://github.com/edsboys/vut-clinic-system
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false

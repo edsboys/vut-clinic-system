@@ -22,5 +22,11 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # Install Laravel dependencies
 RUN composer install --no-interaction --optimize-autoloader
 
+RUN cp .env.example .env
+RUN php artisan key:generate
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan view:cache
+
 # Expose port 80
 EXPOSE 80
