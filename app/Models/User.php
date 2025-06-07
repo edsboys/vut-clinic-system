@@ -17,14 +17,14 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var string
      */
-    protected $table = 'users';  // Only specify if different from 'users'
+    protected $table = 'users';
 
     /**
      * The primary key for the model.
      *
      * @var string
      */
-    protected $primaryKey = 'id'; // Only specify if different from 'id'
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -38,7 +38,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'role',
     ];
-
 
     /**
      * The attributes that should be hidden for arrays.
@@ -57,26 +56,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        // Add other casts like 'is_admin' => 'boolean' if needed
     ];
-
-    /**
-     * Custom accessor for the email attribute.
-     * Allows Laravel to use 'university_email' as 'email'
-     */
-    public function getEmailAttribute()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Custom mutator for the email attribute.
-     * Ensures both 'email' and 'university_email' stay in sync
-     */
-    public function setEmailAttribute($value)
-    {
-        $this->attributes['email'] = $value;
-    }
 
     /**
      * Relationship: User has many appointments

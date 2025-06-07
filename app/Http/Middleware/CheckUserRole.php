@@ -17,7 +17,8 @@ class CheckUserRole
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (!in_array($request->user()->role, $roles)) {
+        $user = $request->user();
+        if (!$user || !in_array($user->role, $roles)) {
             abort(403); // Forbidden
         }
 

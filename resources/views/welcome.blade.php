@@ -33,7 +33,7 @@
 
         /* --- NEW STYLES FOR BLUE SECTIONS --- */
         .bg-vut-blue-section {
-            background-color: red;
+            background-color: #072C5E; /* Fixed: was 'red', now VUT blue */
             color: var(--light-color);
             padding-top: 80px;
             padding-bottom: 80px;

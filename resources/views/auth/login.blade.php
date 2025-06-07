@@ -125,7 +125,7 @@
             <!-- Validation Errors -->
             <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-            <form method="POST" action="{{ url('/login') }}">
+            <form method="POST" action="{{ route('login') }}">
                 @csrf
 
                 <h1 style="color: #2c3e50; font-size: 24px; margin-bottom: 30px; text-align: center;">VUT Clinic Portal
@@ -141,14 +141,29 @@
                     <option value="nurse">Nurse</option>
                 </select>
 
-                <!-- Email -->
-                <input type="email" name="email" required autofocus></input>
+                <!-- Email or University ID -->
+                <div>
+                    <label for="login">Email or University ID</label>
+                    <input type="text" name="login" id="login" required>
+                </div>
 
                 <!-- Password -->
-                <input type="password" name="password" required ></input>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
 
                 <!-- Submit -->
                 <button type="submit">Login</button>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </form>
         </x-auth-card>
     </div>

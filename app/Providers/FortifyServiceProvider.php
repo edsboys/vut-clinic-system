@@ -63,22 +63,23 @@ class FortifyServiceProvider extends ServiceProvider
 
             // Determine if login is email or ID
             $isEmail = filter_var($request->login, FILTER_VALIDATE_EMAIL);
-            
+
             // Query user based on login type
+            $user = null;
             if ($isEmail) {
                 $user = \App\Models\User::where('email', $request->login)->first();
             } else {
-                // Assuming 'id' is your user ID field - adjust if you use 'student_id' or similar
+                // Adjust this if you use a different ID field
                 $user = \App\Models\User::where('id', $request->login)
-                    ->orWhere('student_id', $request->login) // Add this if you have a student_id field
+                    ->orWhere('student_id', $request->login)
                     ->first();
             }
 
             // Check if user exists, password matches, and role matches
-            if ($user && 
-                Hash::check($request->password, $user->password) && 
+            if ($user &&
+                Hash::check($request->password, $user->password) &&
                 $user->role === $request->role) {
-                
+
                 Log::info('Successful login for user:', ['id' => $user->id, 'role' => $user->role]);
                 return $user;
             }

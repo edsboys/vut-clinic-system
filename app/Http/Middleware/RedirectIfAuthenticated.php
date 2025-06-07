@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,25 +20,20 @@ class RedirectIfAuthenticated
     {
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                $role = Auth::user()->role;
-    
-                switch ($role) {
-                    case 'admin':
-                        return redirect('/dashboard/admin');
-                    case 'doctor':
-                        return redirect('/dashboard/doctor');
-                    case 'nurse':
-                        return redirect('/dashboard/nurse');
-                    case 'student':
-                        return redirect('/dashboard/student');
-                    case 'staff':
-                        return redirect('/dashboard/staff');
-                    default:
-                        return redirect('/dashboard');
-                }
+                $role = Auth::guard($guard)->user()->role ?? null;
+
+                $routes = [
+                    'admin'   => route('admin.dashboard'),
+                    'doctor'  => route('doctor.dashboard'),
+                    'nurse'   => route('nurse.dashboard'),
+                    'student' => route('student.dashboard'),
+                    'staff'   => route('staff.dashboard'),
+                ];
+
+                return redirect($routes[$role] ?? route('dashboard'));
             }
         }
-    
+
         return $next($request);
     }
 }

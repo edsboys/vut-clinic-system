@@ -8,9 +8,21 @@ class HomeController extends Controller
 {
     public function index() 
     {
-        $role = auth()->user()->role;
+        // Redirect user to their role-based dashboard
+        $role = auth()->user()->role ?? null;
+        $dashboards = [
+            'student' => 'student.dashboard',
+            'staff'   => 'staff.dashboard',
+            'admin'   => 'admin.dashboard',
+            'doctor'  => 'doctor.dashboard',
+            'nurse'   => 'nurse.dashboard'
+        ];
 
-        return $role;
+        if (!isset($dashboards[$role])) {
+            abort(403, 'Unauthorized role');
+        }
+
+        return redirect()->route($dashboards[$role]);
     }
     
     public function dashboard() 

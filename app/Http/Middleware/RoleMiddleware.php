@@ -13,12 +13,13 @@ class RoleMiddleware
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @param  string  $role
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        if (!Auth::check() || Auth::user()->role != $role) {
-            return redirect('/');
+        if (!Auth::check() || Auth::user()->role !== $role) {
+            abort(403, 'Unauthorized action.');
         }
         return $next($request);
     }

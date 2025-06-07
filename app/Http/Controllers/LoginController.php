@@ -30,7 +30,20 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/welcome');
+            // Redirect user based on their role
+            $role = Auth::user()->role ?? null;
+            switch ($role) {
+                case 'admin':
+                    return redirect()->route('admin.dashboard');
+                case 'doctor':
+                    return redirect()->route('doctor.dashboard');
+                case 'nurse':
+                    return redirect()->route('nurse.dashboard');
+                case 'staff':
+                    return redirect()->route('staff.dashboard');
+                default:
+                    return redirect()->route('student.dashboard');
+            }
         }
 
         return back()->withErrors([
@@ -49,22 +62,5 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
-    }
-
-
-    public function authenticated(Request $request, $user)
-    {
-        // Redirect user based on their role
-        if ($user->role === 'admin') {
-            return redirect()->route('admin.dashboard');
-        } elseif ($user->role === 'doctor') {
-            return redirect()->route('doctor.dashboard');
-        } elseif ($user->role === 'nurse') {
-            return redirect()->route('nurse.dashboard');
-        } elseif ($user->role === 'staff') {
-            return redirect()->route('staff.dashboard');
-        } else {
-            return redirect()->route('student.dashboard');
-        }
     }
 }
