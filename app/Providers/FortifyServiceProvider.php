@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
@@ -14,6 +13,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Route;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -92,6 +92,10 @@ class FortifyServiceProvider extends ServiceProvider
             ]);
 
             return null;
+        });
+
+        Route::get('/register', function () {
+            abort(404);
         });
 
         // Views for Fortify

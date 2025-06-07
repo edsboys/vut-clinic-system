@@ -1,2 +1,6 @@
-<h1 class="text-2xl font-bold text-center mt-10">Student Dashboard</h1>
-<p class="text-center">Welcome to the student section of the VUT Clinic Portal.</p>
+@extends('layouts.app')
+
+@section('content')
+    <h1>Welcome to your Student Dashboard, {{ Auth::user()->name }}!</h1>
+    <!-- Add more content here for the student dashboard -->
+@endsection

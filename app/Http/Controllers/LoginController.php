@@ -30,7 +30,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/welcome');
         }
 
         return back()->withErrors([
@@ -49,5 +49,22 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+
+    public function authenticated(Request $request, $user)
+    {
+        // Redirect user based on their role
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->role === 'doctor') {
+            return redirect()->route('doctor.dashboard');
+        } elseif ($user->role === 'nurse') {
+            return redirect()->route('nurse.dashboard');
+        } elseif ($user->role === 'staff') {
+            return redirect()->route('staff.dashboard');
+        } else {
+            return redirect()->route('student.dashboard');
+        }
     }
 }
