@@ -14,7 +14,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
- :root {
+        :root {
             --primary-color: #007bff;
             --secondary-color: #6c757d;
             --accent-color: #6610f2;
@@ -170,7 +170,7 @@
         }
 
         .hours {
-            background-color: var(--primary-color);
+            background-color:  #072C5E;
             color: white;
             padding: 80px 0;
             text-align: center;
@@ -198,6 +198,61 @@
 
         .hours-list li:last-child {
             border-bottom: none;
+        }
+
+        /* Main Header Container */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #201c52;
+            /* VUT Dark Blue */
+            padding: 15px 30px;
+        }
+
+        /* Logo Styling */
+        .logo img {
+            max-height: 50px;
+        }
+
+        /* Nav List Styling */
+        .nav-links ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Regular Links */
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00aced;
+            /* Light blue on hover */
+        }
+
+        /* Emergency Button */
+        .emergency-btn {
+            background-color: #ffc107;
+            /* Yellow/Orange */
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .emergency-btn:hover {
+            background-color: #ff9800;
+            /* Deeper orange on hover */
+            color: white;
         }
 
         .footer {
@@ -248,61 +303,37 @@
                 font-size: 1rem;
             }
         }
-
     </style>
 </head>
 
 <body>
-
-<header class="site-header header-main-layout-1" id="masthead">
-        <div id="ast-desktop-header">
-            <div class="ast-above-header-wrap">
-                <div class="ast-above-header-bar ast-above-header site-header-focus-item">
-                    <div class="site-above-header-wrap ast-builder-grid-row-container site-header-focus-item container">
-                        <div class="ast-builder-grid-row ast-builder-grid-row-has-sides ast-builder-grid-row-no-center">
-                            <div class="site-header-above-section-left site-header-section ast-flex site-header-section-left">
-                                <div class="ast-builder-layout-element ast-flex site-header-focus-item">
-                                    <div class="site-branding ast-site-identity">
-                                        
-                                        <span class="site-logo-img">
-                                            <a href="https://vut.ac.za/" class="custom-logo-link" rel="home">
-                                                <img src="https://vut.ac.za/wp-content/uploads/2025/05/Vaal-University-of-Technology.webp" 
-                                                     class="custom-logo" 
-                                                     alt="Vaal University of Technology" 
-                                                     decoding="async" />
-                                            </a>
-                                        </span>
-                                        <nav class="navbar navbar-expand-lg navbar-custom">
-                                            <div class="container">
-                                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                                                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                                    <span class="navbar-toggler-icon"></span>
-                                                </button>
-                                                <div class="collapse navbar-collapse" id="navbarNav">
-                                                    <ul class="navbar-nav ms-auto">
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" href="#services">Services</a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" href="#contact">Contact</a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" href="#about">About Us</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <header class="site-header" id="masthead">
+        <div class="header-container">
+            <!-- Left: Logo -->
+            <div class="logo">
+                <a href="https://vut.ac.za/" class="custom-logo-link" rel="home">
+                    <img src="https://vut.ac.za/wp-content/uploads/2025/05/Vaal-University-of-Technology.webp"
+                        class="custom-logo" alt="Vaal University of Technology" />
+                </a>
             </div>
-        </div>
 
-        
+            <!-- Right: Navigation -->
+            <nav class="nav-links">
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a class="emergency-btn" href="http://127.0.0.1:8000/login">Book Appointment</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    </div>
+    </div>
+
+
     </header>
 
     <header class="hero">
