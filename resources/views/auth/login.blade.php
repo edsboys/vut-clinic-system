@@ -1,172 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-guest-layout>
+    <x-auth-card>
+        <x-slot name="logo">
+            <a href="/">
+                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            </a>
+        </x-slot>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University Health Clinic - Login</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #333;
-            background-image: url('https://www.careersportal.co.za/sites/default/files/styles/max_2600x2600/public/images/Abdul%20Gallow/vut2.jpg?itok=c0UqhTz8');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
-        }
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        .login-container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            padding: 40px;
-            text-align: center;
-        }
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        .logo {
-            width: 120px;
-            margin-bottom: 20px;
-        }
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
-        h1 {
-            color: #2c3e50;
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
+            <!-- Email Address -->
+            <div>
+                <x-label for="email" :value="__('Email')" />
 
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            </div>
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
+            <!-- Password -->
+            <div class="mt-4">
+                <x-label for="password" :value="__('Password')" />
 
-        input,
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
+                <x-input id="password" class="block mt-1 w-full"
+                                type="password"
+                                name="password"
+                                required autocomplete="current-password" />
+            </div>
 
-        button {
-            background-color: rgba(51, 74, 255, .8);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
+            <!-- Remember Me -->
+            <div class="block mt-4">
+                <label for="remember_me" class="inline-flex items-center">
+                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                </label>
+            </div>
 
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        .links {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-
-        .links a {
-            color: #3498db;
-            text-decoration: none;
-            margin: 0 5px;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-        }
-
-        .role-selector {
-            margin-bottom: 20px;
-        }
-
-        .role-selector select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            background-color: white;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="login-container">
-        <x-auth-card>
-            <x-slot name="logo">
-                <img src="images/Logo.png" alt="University Logo" class="logo"
-                    style="width: 120px; margin-bottom: 20px;">
-            </x-slot>
-
-            <!-- Session Status -->
-            <x-auth-session-status class="mb-4" :status="session('status')" />
-
-            <!-- Validation Errors -->
-            <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-
-                <h1 style="color: #2c3e50; font-size: 24px; margin-bottom: 30px; text-align: center;">VUT Clinic Portal
-                </h1>
-
-                <!-- Role -->
-                <select name="role" required>
-                    <option value="">-- Select Role --</option>
-                    <option value="student">Student</option>
-                    <option value="staff">Staff</option>
-                    <option value="admin">Admin</option>
-                    <option value="doctor">Doctor</option>
-                    <option value="nurse">Nurse</option>
-                </select>
-
-                <!-- Email or University ID -->
-                <div>
-                    <label for="login">Email or University ID</label>
-                    <input type="text" name="login" id="login" required>
-                </div>
-
-                <!-- Password -->
-                <div>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required>
-                </div>
-
-                <!-- Submit -->
-                <button type="submit">Login</button>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+            <div class="flex items-center justify-end mt-4">
+                @if (Route::has('password.request'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
                 @endif
-            </form>
-        </x-auth-card>
-    </div>
-</body>
 
-</html>
+                <x-button class="ml-3">
+                    {{ __('Log in') }}
+                </x-button>
+            </div>
+        </form>
+    </x-auth-card>
+</x-guest-layout>

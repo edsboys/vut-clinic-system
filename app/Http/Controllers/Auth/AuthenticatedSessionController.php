@@ -28,17 +28,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        // Add role to credentials for authentication
-        $credentials = $request->only('email', 'password', 'role');
+        $request->authenticate();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
+        $request->session()->regenerate();
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records or role is incorrect.',
-        ]);
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**
