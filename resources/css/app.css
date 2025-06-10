@@ -2,9 +2,6 @@
   The following directives require Tailwind CSS to be processed via PostCSS or the Tailwind CLI.
   If you see "Unknown at rule @tailwind", make sure to build your CSS using Tailwind's build process.
 */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
    /* BASE STYLES */
    :root {
     --vut-blue: #0033a0;
