@@ -1,3 +1,425 @@
+/*
+  The following directives require Tailwind CSS to be processed via PostCSS or the Tailwind CLI.
+  If you see "Unknown at rule @tailwind", make sure to build your CSS using Tailwind's build process.
+*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+   /* BASE STYLES */
+   :root {
+    --vut-blue: #0033a0;
+    --vut-yellow: #ffd100;
+    --light-blue: #e6f0ff;
+    --dark-blue: #001f5c;
+    --light-gray: #f8f9fa;
+    --dark-gray: #343a40;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #fff;
+    overflow-x: hidden;
+    padding-top: 80px;
+    margin: 0; /* Fix: Ensure no default margin on body */
+}
+
+/* HEADER STYLES */
+.header {
+    background: linear-gradient(135deg, var(--vut-blue) 0%, var(--dark-blue) 100%);
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.logo-placeholder i {
+    color: var(--vut-blue);
+    font-size: 28px;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-text h1 {
+    font-size: 1.0rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.brand-text .subtitle {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: white !important;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 15%;
+    width: 70%;
+    height: 3px;
+    background-color: var(--vut-yellow);
+}
+
+.btn-vut {
+    background-color: var(--vut-yellow);
+    color: var(--dark-blue);
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 30px;
+    transition: all 0.3s;
+    border: none;
+}
+
+.btn-vut:hover {
+    background-color: #e6c000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* HERO SECTION */
+.hero {
+    background: linear-gradient(rgba(142, 152, 174, 0.85), rgba(215, 219, 226, 0.9)), url(images/WhatsApp\ Image\ 2025-05-28\ at\ 21.49.44_69551739.jpg) center/cover no-repeat;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+    border-radius: 0 0 30px 30px;
+    margin-bottom: 50px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    opacity: 0.9;
+}
+
+/* SERVICES SECTION */
+.services {
+    padding: 50px 0;
+}
+
+.section-title {
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: var(--vut-blue);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--vut-yellow);
+}
+
+.service-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    height: 100%;
+    border: none;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+    height: 70px;
+    width: 70px;
+    background-color: var(--light-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px auto 20px;
+    color: var(--vut-blue);
+    font-size: 28px;
+}
+
+/* HOURS SECTION */
+.hours {
+    padding: 80px 0;
+    background-color: var(--vut-blue);
+    color: white;
+    margin: 50px 0;
+}
+
+.hours-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 30px;
+    height: 100%;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hours-list {
+    list-style: none;
+    padding: 0;
+}
+
+.hours-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* FOOTER */
+.footer {
+    background: var(--dark-blue);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 60px 0 20px;
+    margin-top: 50px;
+}
+
+.footer h5 {
+    color: white;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer h5::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--vut-yellow);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--vut-yellow);
+    padding-left: 5px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    margin-right: 10px;
+    transition: all 0.3s;
+}
+
+.social-icons a:hover {
+    background-color: var(--vut-yellow);
+    color: var(--dark-blue);
+    transform: translateY(-3px);
+}
+
+.copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .date-time-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* APPOINTMENT FORM STYLES */
+.appointment-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.appointment-header {
+    background: var(--vut-blue);
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+.form-control,
+.form-select {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--vut-blue);
+    box-shadow: 0 0 0 0.25rem rgba(0, 51, 160, 0.25);
+}
+
+.date-time-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.date-time-group .form-control {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* CONTACT STYLES */
+.contact-card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--light-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--vut-blue);
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* SERVICES PAGE STYLES */
+.service-detail {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.service-image {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+.logo-placeholder img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.service-icon {
+    animation: pulse 2s infinite;
+}
+
+.footer .logo-placeholder img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
